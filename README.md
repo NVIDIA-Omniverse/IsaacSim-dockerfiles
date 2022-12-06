@@ -7,6 +7,7 @@ This repository contains Dockerfiles for building an Isaac Sim container.
 ### Pre-Requisites
 
 Before getting started, ensure that the system has the latest [NVIDIA Driver](https://www.nvidia.com/en-us/drivers/unix/) and the [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-docker) installed.
+
 Use your [NGC Account](https://docs.nvidia.com/ngc/ngc-overview/index.html#registering-activating-ngc-account) to get access to the [Isaac Sim Container](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/isaac-sim) and generate your [NGC API Key](https://docs.nvidia.com/ngc/ngc-overview/index.html#generating-api-key).
 
 ## Build
@@ -67,11 +68,13 @@ docker run --name isaac-sim --entrypoint bash -it --gpus all -e "ACCEPT_EULA=Y" 
 ```
 
 Connect to Isaac Sim using the [Omniverse Streaming Client](https://docs.omniverse.nvidia.com/app_streaming-client/app_streaming-client/user-manual.html).
+
 See [Container Deployment](https://docs.omniverse.nvidia.com/app_isaacsim/app_isaacsim/install_advanced_container_deployment.html) for information on container deployment.
 
 ## Licensing
 
 The source code in this repository is licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
 The resulting container images are licensed under the [NGC Deep Learning Container License](https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license).
 
 ## Support
