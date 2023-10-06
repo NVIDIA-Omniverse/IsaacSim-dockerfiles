@@ -17,12 +17,9 @@ Clone this repository and then build the image:
 ```bash
 docker login nvcr.io
 docker build --pull -t \
-  isaac-sim:2022.2.1-ubuntu20.04 \
-  --build-arg ISAACSIM_VERSION=2022.2.1 \
-  --build-arg BASE_DIST=ubuntu20.04 \
-  --build-arg CUDA_VERSION=11.4.2 \
-  --build-arg VULKAN_SDK_VERSION=1.3.224.1 \
-  --file Dockerfile.2022.2.1-ubuntu20.04 .
+  isaac-sim:2023.1.0-ubuntu22.04 \
+  --build-arg ISAACSIM_VERSION=2023.1.0 \
+  --file Dockerfile.2023.1.0-ubuntu22.04 .
 ```
 
 ## Usage
@@ -31,7 +28,8 @@ To run the container and start Isaac Sim as a headless app:
 
 ```bash
 docker run --name isaac-sim --entrypoint bash -it --gpus all -e "ACCEPT_EULA=Y" --rm --network=host \
-  -v ~/docker/isaac-sim/cache/kit:/isaac-sim/kit/cache/Kit:rw \
+  -e "PRIVACY_CONSENT=Y" \
+  -v ~/docker/isaac-sim/cache/kit:/isaac-sim/kit/cache:rw \
   -v ~/docker/isaac-sim/cache/ov:/root/.cache/ov:rw \
   -v ~/docker/isaac-sim/cache/pip:/root/.cache/pip:rw \
   -v ~/docker/isaac-sim/cache/glcache:/root/.cache/nvidia/GLCache:rw \
@@ -39,8 +37,8 @@ docker run --name isaac-sim --entrypoint bash -it --gpus all -e "ACCEPT_EULA=Y" 
   -v ~/docker/isaac-sim/logs:/root/.nvidia-omniverse/logs:rw \
   -v ~/docker/isaac-sim/data:/root/.local/share/ov/data:rw \
   -v ~/docker/isaac-sim/documents:/root/Documents:rw \
-  isaac-sim:2022.2.1-ubuntu20.04 \
-  ./runheadless.native.sh
+  isaac-sim:2023.1.0-ubuntu22.04 \
+  ./runheadless.native.sh -v
 ```
 
 To run the container and start Isaac Sim as a windowed app:
@@ -48,9 +46,10 @@ To run the container and start Isaac Sim as a windowed app:
 ```bash
 xhost +
 docker run --name isaac-sim --entrypoint bash -it --gpus all -e "ACCEPT_EULA=Y" --rm --network=host \
+  -e "PRIVACY_CONSENT=Y" \
   -v $HOME/.Xauthority:/root/.Xauthority \
   -e DISPLAY \
-  -v ~/docker/isaac-sim/cache/kit:/isaac-sim/kit/cache/Kit:rw \
+  -v ~/docker/isaac-sim/cache/kit:/isaac-sim/kit/cache:rw \
   -v ~/docker/isaac-sim/cache/ov:/root/.cache/ov:rw \
   -v ~/docker/isaac-sim/cache/pip:/root/.cache/pip:rw \
   -v ~/docker/isaac-sim/cache/glcache:/root/.cache/nvidia/GLCache:rw \
@@ -58,21 +57,21 @@ docker run --name isaac-sim --entrypoint bash -it --gpus all -e "ACCEPT_EULA=Y" 
   -v ~/docker/isaac-sim/logs:/root/.nvidia-omniverse/logs:rw \
   -v ~/docker/isaac-sim/data:/root/.local/share/ov/data:rw \
   -v ~/docker/isaac-sim/documents:/root/Documents:rw \
-  isaac-sim:2022.2.1-ubuntu20.04 \
+  isaac-sim:2023.1.0-ubuntu22.04 \
   ./runapp.sh
 ```
 
-Connect to Isaac Sim using the [Omniverse Streaming Client](https://docs.omniverse.nvidia.com/app_streaming-client/app_streaming-client/user-manual.html).
+Connect to Isaac Sim using the [Omniverse Streaming Client](https://docs.omniverse.nvidia.com/streaming-client/latest/user-manual.html).
 
-See [Container Deployment](https://docs.omniverse.nvidia.com/app_isaacsim/app_isaacsim/install_advanced_container_deployment.html) for information on container deployment.
+See [Container Deployment](https://docs.omniverse.nvidia.com/isaacsim/latest/install_container.html#container-deployment) for information on container deployment.
 
 ## Licensing
 
 The source code in this repository is licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
-The resulting container images are licensed under the [NGC Deep Learning Container License](https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license).
+The resulting container images are licensed under the [NVIDIA Omniverse License Agreement](https://developer.nvidia.com/omniverse/license).
 
 ## Support
 
-* Please use [NVIDIA Developer Forums](https://forums.developer.nvidia.com/c/agx-autonomous-machines/isaac/simulation/69) for questions and comments.
-* See [Isaac Sim Documentation](https://docs.omniverse.nvidia.com/isaacsim/index.html) for more information.
+* Please use [NVIDIA Developer Forums](https://forums.developer.nvidia.com/c/omniverse/simulation/69) for questions and comments.
+* See [Isaac Sim Documentation](https://docs.omniverse.nvidia.com/isaacsim/latest/index.html) for more information.
